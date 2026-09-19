@@ -1,0 +1,155 @@
+
+### Register Author
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "author@example.com",
+  "name": "William Shakespeare",
+  "book": "Hamlet",
+  "password": "secret123"
+}
+
+### Login Author
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "author@example.com",
+  "password": "secret123"
+}
+
+### Get All Authors
+GET http://localhost:3000/authors
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+--------------------------------------- Book Management ---------------------------------------
+
+### Create a Book
+
+POST http://localhost:3000/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+Content-Type: multipart/form-data; boundary=----BookForm
+
+------BookForm
+Content-Disposition: form-data; name="title"
+
+MerN Stack Advance 2026
+------BookForm
+Content-Disposition: form-data; name="author"
+
+William Shakespeare
+------BookForm
+Content-Disposition: form-data; name="isbn"
+
+978-0-7432-7356-5
+------BookForm
+Content-Disposition: form-data; name="categoryId"
+
+6a9fcee86803149f1d66ede3
+------BookForm
+Content-Disposition: form-data; name="coverImage"; filename="cover.jpg"
+Content-Type: image/jpeg
+
+< ./cover.png
+------BookForm--
+
+
+
+# &categoryId=6a9fcee86803149f1d66ede3
+### Get All Books
+GET http://localhost:3000/book?page=1&limit=10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+
+#### Get a Book by ID
+GET http://localhost:3000/book/6aaad2408d24f648711f072f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+
+#### Update a Book by ID (without changing image)
+PATCH  http://localhost:3000/book/6aaad2408d24f648711f072f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+{
+  "title": "Advance Mern Stack Course - 2026",
+  "author": "F. John Smith",
+  "isbn": "978-0-7432-7356-5"
+}
+
+#### Update a Book by ID (with a new cover image)
+PATCH  http://localhost:3000/book/6aaad2408d24f648711f072f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+Content-Type: multipart/form-data; boundary=----BookUpdateForm
+
+------BookUpdateForm
+Content-Disposition: form-data; name="title"
+
+Advance Mern Stack Course - 2026
+------BookUpdateForm
+Content-Disposition: form-data; name="author"
+
+F. John Smith
+------BookUpdateForm
+Content-Disposition: form-data; name="isbn"
+
+978-0-7432-7356-5
+------BookUpdateForm
+Content-Disposition: form-data; name="coverImage"; filename="cover.jpg"
+Content-Type: image/jpeg
+
+< ./cover.png
+------BookUpdateForm--
+
+# ---------------------------------- Category Management ----------------------------------
+
+### Create a Category
+POST  http://localhost:3000/category
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+{
+  "name": "Full Stack",
+  "description": "Full Stack Programmer"
+}
+
+### Get All Categories
+GET http://localhost:3000/category
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+### Update a Category by ID
+PATCH  http://localhost:3000/category/6a9fc345bf87225ae15a3d12
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+{
+  "name": "SDLC Patterns",
+  "description": "Architectural patterns and best practices for software development life cycle"
+}
+
+### Assign to Book
+PATCH  http://localhost:3000/book/6a9e67ac9dcbcf0cf26e158c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+{
+  "categoryId": "6a9fc2c48f7d00a4395d8f95"
+}
+
+
+# ---------------------------------- review Api ----------------------------------
+
+### Create Review
+POST http://localhost:3000/review/123
+Content-Type:application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTllNDhhZDYwNDFlNmVkMTI4NmZlYTkiLCJ1c2VybmFtZSI6IldpbGxpYW0gU2hha2VzcGVhcmUiLCJpYXQiOjE3ODg3NjAyMTN9.qAjdHTEYSyzUvMIHOpuq7zJeQO_SqeFCqwz24BHbXlM
+
+{
+  "rating": 3,
+  "comment": "Comment for You!!"
+}
